@@ -5,10 +5,12 @@ dominate==2.6.0
 Faker==11.3.0
 Flask==2.0.2
 Flask-Bootstrap==3.3.7.1
+gunicorn==20.1.0
 idna==3.3
 itsdangerous==2.0.1
 Jinja2==3.0.3
 MarkupSafe==2.0.1
+psycopg2==2.9.3
 PyJWT==2.3.0
 python-dateutil==2.8.2
 python-dotenv==0.19.2

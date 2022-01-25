@@ -1,3 +1,4 @@
 FLASK_APP=whiteboard.py
 FLASK_ENV=development
 FLASK_DEBUG=1
+LOG_TO_STDOUT=1
