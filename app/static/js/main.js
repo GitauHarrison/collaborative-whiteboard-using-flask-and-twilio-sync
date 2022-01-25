@@ -53,10 +53,22 @@ $(function () {
         canvas.height = window.innerHeight;
     };
 
+    function throttle(callback, delay) {
+        var previousCall = new Date().getTime();
+        return function() {
+            var time = new Date().getTime();
+    
+            if ((time - previousCall) >= delay) {
+                previousCall = time;
+                callback.apply(null, arguments);
+            }
+        };
+    }
+
     canvas.addEventListener('mousedown', onMouseDown);
     canvas.addEventListener('mouseup', onMouseUp);
     canvas.addEventListener('mouseout', onMouseUp);
-    canvas.addEventListener('mousemove', onMouseMove);
+    canvas.addEventListener('mousemove', throttle(onMouseMove, 10));
     
     window.addEventListener('resize', onResize);
     onResize();
