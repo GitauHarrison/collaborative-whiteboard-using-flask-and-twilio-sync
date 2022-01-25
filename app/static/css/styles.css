@@ -29,3 +29,19 @@ html, body {
     bottom: 0;
     top: 0;
 }
+
+/* Buttons */
+.buttons {
+    position: fixed;
+    right: 10px;
+    top: 60px;
+    z-index: 1;  /* make the button on top of the whiteboard */
+}
+
+.btn {
+    padding: 5px 10px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: white;
+    border: 3px solid #bbbbbb;
+}
