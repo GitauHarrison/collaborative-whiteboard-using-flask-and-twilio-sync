@@ -36,21 +36,27 @@ $(function () {
 
     function onMouseDown(e) {
         drawing = true;
-        current.x = e.clientX;
-        current.y = e.clientY;
+        current.x = e.clientX || e.touches[0].clientX;
+        current.y = e.clientY || e.touches[0].clientY;
     }
 
     function onMouseUp(e) {
         if (!drawing) { return; }
         drawing = false;
-        drawLine(current.x, current.y, e.clientX, e.clientY, current.color, syncStream);
+        drawLine(
+          current.x, current.y,
+          e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY,
+          current.color, syncStream);
     }
 
     function onMouseMove(e) {
         if (!drawing) { return; }
-        drawLine(current.x, current.y, e.clientX, e.clientY, current.color, syncStream);
-        current.x = e.clientX;
-        current.y = e.clientY;
+        drawLine(
+          current.x, current.y,
+          e.clientX || e.touches[0].clientX, e.clientY || e.touches[0].clientY,
+          current.color, syncStream);
+        current.x = e.clientX || e.touches[0].clientX;
+        current.y = e.clientY || e.touches[0].clientY;
     }
     
     function onResize() {
@@ -89,6 +95,11 @@ $(function () {
     
     window.addEventListener('resize', onResize);
     onResize();
+
+    canvas.addEventListener('touchstart', onMouseDown);
+    canvas.addEventListener('touchend', onMouseUp);
+    canvas.addEventListener('touchcancel', onMouseUp);
+    canvas.addEventListener('touchmove', throttle(onMouseMove, 10));
 
     $.getJSON('/token', function(tokenResponse) {
         syncClient = new Twilio.Sync.Client(tokenResponse.token, { logLevel: 'info' });
