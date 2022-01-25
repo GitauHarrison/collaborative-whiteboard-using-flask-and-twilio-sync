@@ -45,3 +45,9 @@ html, body {
     background-color: white;
     border: 3px solid #bbbbbb;
 }
+
+nav {
+    position: fixed;
+    top: 0;
+    z-index: 1; 
+}
