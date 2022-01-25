@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn whiteboard:app
+web: gunicorn whiteboard:app
