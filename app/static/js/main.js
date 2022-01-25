@@ -1,4 +1,9 @@
 $(function () {
+    var syncClient;
+    var syncStream;
+    var $message = $('#message');
+    var colorBtn = $('#color-btn');
+    var clearBtn = $('#clear-btn');
     var canvas = $('.whiteboard')[0];
     var context = canvas.getContext('2d');
     var current = {
@@ -64,6 +69,18 @@ $(function () {
             }
         };
     }
+
+    function changeColor() {
+        current.color = '#' + Math.floor(Math.random() * 16777215).toString(16);  // change line color
+        colorBtn.css('border', '5px solid ' + current.color);  // change the button border color
+    };
+
+    function clearBoard() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    };
+
+    colorBtn.on('click', changeColor);
+    clearBtn.on('click', clearBoard);
 
     canvas.addEventListener('mousedown', onMouseDown);
     canvas.addEventListener('mouseup', onMouseUp);
